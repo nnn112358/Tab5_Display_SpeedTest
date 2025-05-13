@@ -1,111 +1,61 @@
 # 250514_M5unified_Tab5_draw_speed
 
-このプロジェクトは、M5Unified および Tab5 を使用した描画速度に焦点を当てた M5Stack 向けの PlatformIO プロジェクトです。高速な描画処理を実現するための最適化手法と実装例を提供します。
 
 ## 概要
+@lovyan03 氏のXより、setRotationで描画速度が変化するという報告があった。
+Tab5にて、Spriteの大きさとsetRotationを変えて描画速度を検証した。
 
-このプロジェクトでは、M5Stack デバイス上での描画処理の高速化に焦点を当て、以下の内容を実装・検証しています：
-
-- 様々な描画手法のパフォーマンス比較
-- スプライト描画と直接描画の速度差
-- ダブルバッファリングの効果
-- 描画関数の最適化手法
+![image](https://github.com/user-attachments/assets/ef9c9e47-1deb-4000-af0c-d4074df9f33e)
+https://x.com/lovyan03/status/1922263342413959502
 
 ## プロジェクト構成
-
-- `src/main.cpp`: メインソースファイル。描画速度テストのコードを含みます。
-- `src/benchmark.h`: 描画速度ベンチマーク用の関数定義。
-- `src/graphics.h`: 最適化された描画関数の実装。
+- `src/main.cpp`: メインソースファイル。
 - `platformio.ini`: PlatformIO 設定ファイル。必要な依存関係とビルド設定を含みます。
-- `.gitignore`: Git 無視ファイル。
-- `data/`: アセットファイル（画像、フォントなど）を格納するディレクトリ。
 
-## 機能
 
-- **描画速度ベンチマーク**: 異なる描画手法のフレームレートを測定・比較
-- **最適化手法の実装**: スプライト、DMA転送、ダブルバッファリングなどの実装例
-- **インタラクティブデモ**: タッチ操作で異なる描画モードを切り替え可能
-- **パフォーマンスモニタリング**: リアルタイムFPS表示とメモリ使用量の監視
-
-## はじめに
-
-1. リポジトリをクローンします。
-   ```
-   git clone https://github.com/yourusername/250514_M5unified_Tab5_draw_speed.git
-   ```
-
-2. PlatformIO でプロジェクトを開きます。
+## ビルド手順
+1. PlatformIO でプロジェクトを開きます。
    - Visual Studio Code + PlatformIO 拡張機能を使用する場合：
      - VSCode で「ファイル」→「フォルダを開く」からプロジェクトフォルダを選択
      - PlatformIO のサイドバーからプロジェクトを開く
 
-3. 必要に応じて `platformio.ini` の設定を調整します。
-   - 使用するM5Stackモデルに合わせてボード設定を変更
-   - 必要なライブラリのバージョンを確認
-
-4. ビルドして M5Stack デバイスにアップロードします。
+2. ビルドして M5Stack デバイスにアップロードします。
    - PlatformIO の「Upload」ボタンをクリック
    - または、ターミナルから `pio run -t upload` を実行
 
-## 使用方法
-
-1. プログラムをアップロード後、M5Stack が自動的に起動します。
-2. メイン画面に描画速度テストのメニューが表示されます。
-3. 各テストモードを選択して描画速度の違いを確認できます：
-   - 標準描画モード
-   - スプライト描画モード
-   - ダブルバッファリングモード
-   - DMA高速転送モード
-4. 画面をタッチするか、ボタンを押すことで異なるテストに切り替えられます。
-5. 各モードでのFPS（フレーム/秒）が画面に表示されます。
 
 ## パフォーマンス結果
+![image](https://github.com/user-attachments/assets/cb77ca24-24a6-4fba-b63c-5531c3248dd3)
 
-| 描画モード | 平均FPS | メモリ使用量 | 備考 |
-|------------|---------|------------|------|
-| 標準描画    | 15-20   | 低         | 基本的な描画関数を使用 |
-| スプライト  | 30-40   | 中         | メモリ内で描画後に一括転送 |
-| ダブルバッファ | 25-35 | 高         | 画面のちらつきを防止 |
-| DMA転送    | 40-60   | 中〜高     | ハードウェア支援による高速化 |
-
-※ 実際の数値はデバイスの種類や描画内容により異なります
+```
+Size: 160x160
+Rotation 0: 2.05 ms/frame
+Rotation 1: 2.00 ms/frame
+Rotation 2: 2.00 ms/frame
+Rotation 3: 2.00 ms/frame
+Size: 320x320
+Rotation 0: 14.05 ms/frame
+Rotation 1: 14.95 ms/frame
+Rotation 2: 14.05 ms/frame
+Rotation 3: 15.00 ms/frame
+Size: 640x640
+Rotation 0: 55.00 ms/frame
+Rotation 1: 288.05 ms/frame
+Rotation 2: 55.05 ms/frame
+Rotation 3: 288.00 ms/frame
+Size: 720x720
+Rotation 0: 68.00 ms/frame
+Rotation 1: 72.00 ms/frame
+Rotation 2: 68.05 ms/frame
+Rotation 3: 72.05 ms/frame
+Size: 720x1280
+Rotation 0: 120.00 ms/frame
+Rotation 2: 120.60 ms/frame
+Size: 1280x720
+Rotation 1: 646.05 ms/frame
+Rotation 3: 645.80 ms/frame
+```
 
 ## 依存関係
-
 - [M5Unified](https://github.com/m5stack/M5Unified) - M5Stackデバイス用の統合ライブラリ
-- [LovyanGFX](https://github.com/lovyan03/LovyanGFX) - 高速グラフィックライブラリ
-- その他 `platformio.ini` に指定されている依存関係
 
-## トラブルシューティング
-
-- **描画が遅い場合**: 
-  - CPUクロック周波数を確認（`M5.Lcd.setCpuFrequencyMhz(240)`で最大に設定）
-  - スプライト描画やDMA転送の使用を検討
-  - 描画領域を最小限に抑える
-
-- **メモリ不足エラー**:
-  - スプライトサイズを小さくする
-  - PSRAMを有効にする（対応デバイスの場合）
-  - 不要なリソースを解放する
-
-- **コンパイルエラー**:
-  - ライブラリのバージョンを確認
-  - 使用しているM5Stackモデルに合わせた設定になっているか確認
-
-## 貢献方法
-
-1. このリポジトリをフォークします。
-2. 新しい機能ブランチを作成します (`git checkout -b feature/amazing-feature`)
-3. 変更をコミットします (`git commit -m 'Add some amazing feature'`)
-4. ブランチにプッシュします (`git push origin feature/amazing-feature`)
-5. プルリクエストを作成します
-
-## ライセンス
-
-[ここにライセンスを記述してください。例: MIT License]
-
-## 謝辞
-
-- M5Stack コミュニティの皆様
-- LovyanGFX の開発者 lovyan03 氏
-- その他、このプロジェクトに貢献してくださった全ての方々
