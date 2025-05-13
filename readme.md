@@ -5,7 +5,6 @@
 @lovyan03 氏のXより、setRotationで描画速度が変化するという報告があった。
 Tab5にて、Spriteの大きさとsetRotationを変えて描画速度を検証した。
 
-![image](https://github.com/user-attachments/assets/ef9c9e47-1deb-4000-af0c-d4074df9f33e)
 https://x.com/lovyan03/status/1922263342413959502
 
 ## プロジェクト構成
