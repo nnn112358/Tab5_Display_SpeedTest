@@ -7,22 +7,6 @@ Tab5にて、Spriteの大きさとsetRotationを変えて描画速度を検証�
 
 https://x.com/lovyan03/status/1922263342413959502
 
-## プロジェクト構成
-- `src/main.cpp`: メインソースファイル。
-- `platformio.ini`: PlatformIO 設定ファイル。必要な依存関係とビルド設定を含みます。
-
-
-## ビルド手順
-1. PlatformIO でプロジェクトを開きます。
-   - Visual Studio Code + PlatformIO 拡張機能を使用する場合：
-     - VSCode で「ファイル」→「フォルダを開く」からプロジェクトフォルダを選択
-     - PlatformIO のサイドバーからプロジェクトを開く
-
-2. ビルドして M5Stack デバイスにアップロードします。
-   - PlatformIO の「Upload」ボタンをクリック
-   - または、ターミナルから `pio run -t upload` を実行
-
-
 ## パフォーマンス結果
 ![image](https://github.com/user-attachments/assets/cb77ca24-24a6-4fba-b63c-5531c3248dd3)
 
@@ -54,6 +38,24 @@ Size: 1280x720
 Rotation 1: 646.05 ms/frame
 Rotation 3: 645.80 ms/frame
 ```
+
+## プロジェクト構成
+- `src/main.cpp`: メインソースファイル。
+- `platformio.ini`: PlatformIO 設定ファイル。必要な依存関係とビルド設定を含みます。
+
+
+## ビルド手順
+1. PlatformIO でプロジェクトを開きます。
+   - Visual Studio Code + PlatformIO 拡張機能を使用する場合：
+     - VSCode で「ファイル」→「フォルダを開く」からプロジェクトフォルダを選択
+     - PlatformIO のサイドバーからプロジェクトを開く
+
+2. ビルドして M5Stack デバイスにアップロードします。
+   - PlatformIO の「Upload」ボタンをクリック
+   - または、ターミナルから `pio run -t upload` を実行
+
+
+
 
 ## 依存関係
 - [M5Unified](https://github.com/m5stack/M5Unified) - M5Stackデバイス用の統合ライブラリ
